@@ -1,15 +1,17 @@
 from autogen.agentchat.contrib.retrieve_assistant_agent import RetrieveAssistantAgent
 from autogen.agentchat.contrib.retrieve_user_proxy_agent import UserProxyAgent
+from langchain.memory import ChatMessageHistory
 from langchain.prompts import PromptTemplate
+from langchain_community.vectorstores import Chroma
 
 
 class DocumentManager:
-    def __init__(self, retriever):
+    def __init__(self, retriever: Chroma):
         self.retriever = retriever
 
     def get_product_details(self, query: str) -> str:
         """
-        Retrieve product details from RAG based on the query and format them.
+        Retrieve product details from RAG based on the query.
 
         Parameters
         ----------
@@ -19,18 +21,33 @@ class DocumentManager:
         Returns
         -------
         str
-            Formatted string with product details.
+            String with product details.
         """
         retrieved_docs = self.retriever.get_relevant_documents(query)
         return retrieved_docs
 
 
 class MarketplaceChatbot:
-    def __init__(self, retriever):
+    """
+    A chatbot class designed for managing interactions within a marketplace environment.
+    This chatbot assists users by providing information on products based on their queries
+    and guiding them through various stages of the buying process.
+
+    Attributes:
+        state (str): Represents the current state of the chatbot in the conversation flow.
+        document_manager (DocumentManager): Manages retrieval and formatting of product
+                                           details from a document database.
+        prompts (dict): A dictionary mapping conversation states to their respective
+                        prompt templates, which are used to generate responses based on
+                        user inputs and document data.
+
+    Methods:
+        __init__: Initializes the chatbot with a document retriever.
+    """
+
+    def __init__(self, retriever: Chroma):
         self.state = "Welcome"
-        self.user_data = {}
         self.document_manager = DocumentManager(retriever)
-        self.last_search_results = ""
         self.prompts = {
             "Welcome": PromptTemplate(
                 template="""
@@ -85,7 +102,18 @@ class MarketplaceChatbot:
 
 
 class MarketplaceAgent:
-    def __init__(self, chatbot):
+    """
+    Manages conversation state transitions within a marketplace environment, utilizing
+    a state machine approach with an LLM to determine and update states based on user interaction.
+
+    Attributes:
+        chatbot (MarketplaceChatbot): The chatbot instance managing the conversation.
+        llm (RetrieveAssistantAgent): LLM agent used to determine conversation state.
+        visited_states (List[str]): A list of states the conversation has already visited.
+        user_proxy (UserProxyAgent): Proxy agent that manages communication with the LLM.
+    """
+
+    def __init__(self, chatbot: MarketplaceChatbot):
         self.chatbot = chatbot
         self.llm = RetrieveAssistantAgent(
             name="MarketplaceStateAgent",
@@ -97,11 +125,7 @@ class MarketplaceAgent:
             },
         )
         self.visited_states = []
-
-    def determine_state(self, history):
-        prompt = self.generate_prompt(history)
-
-        user_proxy = UserProxyAgent(
+        self.user_proxy = UserProxyAgent(
             name="state_agent",
             human_input_mode="NEVER",
             max_consecutive_auto_reply=0,
@@ -113,10 +137,23 @@ class MarketplaceAgent:
                 "use_docker": False,
             },
         )
-        state_prediction = user_proxy.initiate_chat(self.llm, message=prompt)
+
+    def determine_state(self, history: ChatMessageHistory) -> str:
+        """
+        Determines the current conversation state based on the provided history.
+
+        Parameters:
+            history (ChatMessageHistory): The historical record of the conversation.
+
+        Returns:
+            str: The predicted current state of the conversation.
+        """
+        prompt = self.generate_prompt(history)
+        state_prediction = self.user_proxy.initiate_chat(self.llm, message=prompt)
         return state_prediction
 
-    def generate_prompt(self, history):
+    def generate_prompt(self, history: ChatMessageHistory) -> str:
+        visited_states = ", ".join(self.visited_states)
         prompt = f"""
         Given the conversation history:
         '{history}'
@@ -132,7 +169,7 @@ class MarketplaceAgent:
         ConfirmPurchase: This step is sequential to CollectInfo, it will complete the purchase and generate a link to track the order.
         ThankYou: This last step is mandatory and will thank you and ask for feedback.
 
-        The user has already visited these stages: '{', '.join(self.visited_states)}'
+        The user has already visited these stages: '{visited_states}'
 
         If the user dont visited any stage, the next stage will be Welcome or ProductSearch.
         If the user pass the name, email and phone number, the next stage will be ConfirmPurchase.
@@ -141,15 +178,22 @@ class MarketplaceAgent:
         """
         return prompt
 
-    def update_chatbot_state(self, history):
-        predicted_state = self.determine_state(history)
-        if predicted_state.summary not in self.chatbot.state:
-            self.visited_states.append(predicted_state.summary)
-            self.chatbot.state = predicted_state.summary
-        print(
-            f"Estados visitados: {self.visited_states}, estado atual: {predicted_state.summary}"
-        )
-        return self.chatbot.prompts[predicted_state.summary]
+    def update_chatbot_state(self, history: ChatMessageHistory) -> str:
+        """
+        Updates the chatbot's state based on the conversation history.
 
-    def handle_input(self, history):
+        Parameters:
+            history (ChatMessageHistory): The historical record of the conversation.
+
+        Returns:
+            str: The chatbot's prompt for the newly updated state.
+        """
+        predicted_state = self.determine_state(history)
+        llm_response = predicted_state.summary
+        if llm_response not in self.chatbot.state:
+            self.visited_states.append(llm_response)
+            self.chatbot.state = llm_response
+        return self.chatbot.prompts[llm_response]
+
+    def handle_input(self, history: ChatMessageHistory) -> str:
         return self.update_chatbot_state(history)
