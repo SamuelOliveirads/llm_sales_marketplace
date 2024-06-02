@@ -9,6 +9,7 @@ logs/**
 
 # except their sub-folders
 !data/**/
+!data/01_raw/**
 !data/07_model_output/**
 !logs/**/
 
