@@ -53,7 +53,8 @@ curl -X POST "http://localhost:8000/query" -H "Content-Type: application/json"
 
 app = FastAPI(title="MarketplaceJourney API", description=description, version="1.0.0")
 
-study_journey = MarketplaceJourney()
+retriever = update_chroma_db()
+study_journey = MarketplaceJourney(retriever=retriever)
 
 
 class QueryRequest(BaseModel):
@@ -68,10 +69,7 @@ class QueryResponse(BaseModel):
 @app.post("/query", response_model=QueryResponse)
 def query_model(request: QueryRequest):
     try:
-        retriever = update_chroma_db()
-        message, rag_content = study_journey.get_answer(
-            question=request.question, retriever=retriever
-        )
+        message, rag_content = study_journey.get_answer(question=request.question)
         message_text = message.get("text", "Sem resposta disponível.")
         return QueryResponse(message=message_text, rag_content=rag_content)
     except Exception as e:

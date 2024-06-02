@@ -3,8 +3,8 @@ from typing import List
 
 from dotenv import load_dotenv
 from langchain.docstore.document import Document as LangchainDocument
-from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
 
 load_dotenv()
 

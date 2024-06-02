@@ -2,18 +2,19 @@ import logging
 import os
 import uuid
 from datetime import datetime
-from typing import List, Optional, Tuple
+from typing import Optional, Tuple
 
 import pandas as pd
 from dotenv import load_dotenv
 from langchain.chains.llm import LLMChain
-from langchain.docstore.document import Document as LangchainDocument
 from langchain.memory import ChatMessageHistory
 from langchain.prompts import PromptTemplate
-from langchain_community.chat_models import ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_openai import ChatOpenAI
+
+from src.llm.dinamic_state import DocumentManager, MarketplaceAgent, MarketplaceChatbot
 
 load_dotenv()
 
@@ -25,32 +26,18 @@ logging.basicConfig(
 
 
 class MarketplaceJourney:
-    def __init__(self, llm_type="gpt-3.5-turbo"):
+    def __init__(self, retriever: Chroma, llm_type="gpt-3.5-turbo"):
         self.llm = ChatOpenAI(model_name=llm_type, temperature=0)
         self.session_id = str(uuid.uuid4())
         self.history = ChatMessageHistory()
+        self.document_manager = DocumentManager(retriever)
+        self.chatbot = MarketplaceChatbot(self.document_manager)
+        self.state_agent = MarketplaceAgent(self.chatbot)
 
         self.main_prompt_template = PromptTemplate(
-            template="""
-        Você é um assistente de marketplace, seu objetivo é ajudar usuários a encontrar os produtos
-        e tirar quaisquer dúvidas sobre dúvidas que o usuário tiver.
-        Quando o usuário não tiver mais dúvidas você pode iniciar o processo de compra onde vai
-        primeiro pedir os dados de Nome completo, número de telefone e e-mail, só terminando a coleta
-        desses dados é que vai finalizar a compra gerando o seguinte link: <http://www.test-markeplace.com.br>.
-        Com isso finalize o atendimento e agradeço o usuário pedindo um feedback positivo ou negativo.
-
-        Durante a conversa o fluxo será:
-        1. Perguntar quais produtos o usuário está interessado, irá tratar apenas uma categoria de produto por vez.
-        2. Se o usuário tiver dúvidas sobre o produto irá dar detalhes do mesmo.
-        3. Com as dúvidas satisfeitas vai pedir os dados do usuário.
-        4. Vai finalizar a compra.
-        5. Vai agradeçer e pedir feedback.
-
-        Se o usuário perguntar sobre os produtos querendo detalhes você pode usar a seguinte
-        informação abaixo e deverá responder apenas se o produto conter aqui: \n\n {document} \n\n.
-
-        Aqui está a questão do usuário: {question}
-        """,
+            template="""Você é um assistente de marketplace. Seu objetivo é ajudar os usuários a
+            encontrar os produtos que eles estão interessados. Aqui está a questão do usuário:
+            {question}""",
             input_variables=["question", "document"],
         )
 
@@ -95,13 +82,10 @@ class MarketplaceJourney:
 
     def run_interaction(self, question: str, document: str) -> Optional[str]:
         try:
-            self.add_to_history("user", question)
             response = self.chain_with_history.invoke(
                 {"question": question, "document": document},
                 {"configurable": {"session_id": self.session_id}},
             )
-            response_text = response.get("text", "Sem resposta disponível.")
-            self.add_to_history("ai", response_text)
         except AttributeError as e:
             logging.error(f"Erro ao acessar .messages: {str(e)}")
             response = None
@@ -112,38 +96,11 @@ class MarketplaceJourney:
         self.save_history_to_file()
         self.clear_history()
 
-    def format_docs(self, docs: List[LangchainDocument]) -> str:
-        """
-        Format documents into a structured string.
+    def update_prompt(self, next_prompt):
+        self.main_prompt_template = next_prompt
+        self.main_chain.prompt = self.main_prompt_template
 
-        This function formats a list of documents into a structured string,
-        including the source and type of each document (e.g., Vídeo, PDF,
-        Texto, Exercício, Imagem).
-
-        Parameters
-        ----------
-        docs : List[LangchainDocument]
-            The list of documents to be formatted.
-
-        Returns
-        -------
-        str
-            A formatted string representing the documents.
-        """
-        formatted_docs = ""
-        for i, doc in enumerate(docs):
-            source = doc.metadata.get("source", "Desconhecido")
-            if source.endswith(".txt"):
-                format_type = "Texto"
-            else:
-                format_type = "Desconhecido"
-
-            formatted_docs += (
-                f"Documento {i+1} ({format_type}):" f"\n{doc.page_content}\n\n"
-            )
-        return formatted_docs
-
-    def get_answer(self, question: str, retriever: Chroma) -> Tuple[str, Optional[str]]:
+    def get_answer(self, question: str) -> Tuple[str, Optional[str]]:
         """
         Get an answer from the LLM based on the stage of interaction.
 
@@ -154,8 +111,6 @@ class MarketplaceJourney:
         ----------
         question : str
             The question asked by the user.
-        retriever : Chroma
-            The retriever used to get relevant documents.
 
         Returns
         -------
@@ -163,9 +118,13 @@ class MarketplaceJourney:
             A tuple containing the response message and the formatted documents
             (if applicable).
         """
-        retrieved_docs = retriever.get_relevant_documents(question)
-        formatted_docs = self.format_docs(retrieved_docs)
+        self.add_to_history("user", question)
+        formatted_docs = self.document_manager.get_product_details(question)
+        next_prompt = self.state_agent.handle_input(self.history)
+        self.update_prompt(next_prompt)
         response = self.run_interaction(question, formatted_docs)
+        response_text = response.get("text", "Sem resposta disponível.")
+        self.add_to_history("ai", response_text)
         rag_content = formatted_docs
 
         return response, rag_content
