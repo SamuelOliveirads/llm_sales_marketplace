@@ -117,8 +117,6 @@ class MarketplaceAgent:
         return state_prediction
 
     def generate_prompt(self, history):
-        history_text = " > ".join(self.visited_states)
-        # Construir o histórico da conversa em uma string para o prompt
         prompt = f"""
         Given the conversation history:
         '{history}'
@@ -134,7 +132,7 @@ class MarketplaceAgent:
         ConfirmPurchase: This step is sequential to CollectInfo, it will complete the purchase and generate a link to track the order.
         ThankYou: This last step is mandatory and will thank you and ask for feedback.
 
-        The user has already visited these stages: '{', '.join(history_text)}'
+        The user has already visited these stages: '{', '.join(self.visited_states)}'
 
         If the user dont visited any stage, the next stage will be Welcome or ProductSearch.
         If the user pass the name, email and phone number, the next stage will be ConfirmPurchase.

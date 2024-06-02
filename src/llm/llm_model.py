@@ -10,6 +10,7 @@ from langchain.chains.llm import LLMChain
 from langchain.memory import ChatMessageHistory
 from langchain.prompts import PromptTemplate
 from langchain_community.vectorstores import Chroma
+from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_openai import ChatOpenAI
@@ -65,16 +66,16 @@ class MarketplaceJourney:
                 {
                     "session_id": self.session_id,
                     "timestamp": datetime.now().isoformat(),
-                    "sender": sender,
-                    "message": message,
+                    "sender": "Human" if isinstance(message, HumanMessage) else "AI",
+                    "message": message.content,
                 }
-                for sender, message in self.history.messages
+                for message in self.history.messages
             ]
         )
-        output_dir = "../07_model_output/"
+        output_dir = "/07_model_output/"
         os.makedirs(output_dir, exist_ok=True)
         filename = f"{output_dir}{self.session_id}.csv"
-        df.to_csv(filename, index=False)
+        df.to_csv(filename, index=False, encoding="utf-8")
         logging.info(f"Memory saved to {filename}")
 
     def clear_history(self):
@@ -125,6 +126,5 @@ class MarketplaceJourney:
         response = self.run_interaction(question, formatted_docs)
         response_text = response.get("text", "Sem resposta disponível.")
         self.add_to_history("ai", response_text)
-        rag_content = formatted_docs
 
-        return response, rag_content
+        return response

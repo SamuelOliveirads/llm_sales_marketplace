@@ -1,5 +1,4 @@
 import logging
-from typing import Optional
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -63,15 +62,25 @@ class QueryRequest(BaseModel):
 
 class QueryResponse(BaseModel):
     message: str
-    rag_content: Optional[str] = None
+    end_session: bool = False
 
 
 @app.post("/query", response_model=QueryResponse)
 def query_model(request: QueryRequest):
     try:
-        message, rag_content = study_journey.get_answer(question=request.question)
-        message_text = message.get("text", "Sem resposta disponível.")
-        return QueryResponse(message=message_text, rag_content=rag_content)
+        message = study_journey.get_answer(question=request.question)
+        end_session = study_journey.chatbot.state == "ThankYou"
+        return QueryResponse(message=message["text"], end_session=end_session)
     except Exception as e:
         logging.error(f"Erro ao processar a requisição: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/end-session")
+def end_session():
+    try:
+        study_journey.end_session()
+        return {"message": "Session ended successfully"}
+    except Exception as e:
+        logging.error(f"Erro ao tentar finalizar a sessão: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
