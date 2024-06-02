@@ -161,18 +161,23 @@ class StateController:
         Determine the current stage of the marketplace process. The stages are in order:
         Welcome > ProductSearch > ProductQA > CollectInfo > ConfirmPurchase > ThankYou.
 
-        The details of each stage are:
-        Welcome: welcome message if the user gives a greeting.
-        ProductSearch: This step is mandatory, if the user asks something they will access the RAG containing product information and search.
-        ProductQA: If the user has any questions about the product, they will access the RAG and search for more details.
-        CollectInfo: This stage is compulsory, when the user selects a product we must collect initial data to start the purchase.
-        ConfirmPurchase: This step is sequential to CollectInfo, it will complete the purchase and generate a link to track the order.
-        ThankYou: This last step is mandatory and will thank you and ask for feedback.
-
         The user has already visited these stages: '{visited_states}'
 
-        If the user dont visited any stage, the next stage will be Welcome or ProductSearch.
-        If the user pass the name, email and phone number, the next stage will be ConfirmPurchase.
+        If the user wants to understand more about the products, you should consider allowing
+        a return to ProductSearch or ProductQA until the customer is satisfied. Only after all
+        product questions are adequately addressed should you move to CollectInfo.
+
+        The user can return to previous stages if they express the desire to know more about any
+        products even after initially moving past the ProductQA stage. If no product preference
+        is expressed or questions asked, proceed with collecting user information only if
+        you are at the CollectInfo stage.
+
+        If the user provides their name, email, and phone number at any stage without being
+        prompted, consider they may be ready to move to ConfirmPurchase directly.
+
+        If the user states an intent to purchase a specific item, like "I want to buy the laptop,"
+        then you can move directly to ConfirmPurchase if they have already provided their contact
+        information. If not, redirect them to provide this information before confirming the purchase.
 
         What is the current stage? Reply only the specified stage name.
         """
