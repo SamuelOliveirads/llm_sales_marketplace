@@ -15,7 +15,11 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_openai import ChatOpenAI
 
-from src.llm.dinamic_state import DocumentManager, MarketplaceAgent, MarketplaceChatbot
+from src.llm.dinamic_state import (
+    ConversationCoordinator,
+    ProductRetrievalManager,
+    StateController,
+)
 
 load_dotenv()
 
@@ -37,9 +41,9 @@ class MarketplaceJourney:
         llm (ChatOpenAI): The language model used for generating text-based responses.
         session_id (str): A unique identifier for the session.
         history (ChatMessageHistory): Records the history of messages in the session.
-        document_manager (DocumentManager): Manages the retrieval and formatting of product details.
-        chatbot (MarketplaceChatbot): The chatbot handling the conversation logic.
-        state_agent (MarketplaceAgent): Manages state transitions within the conversation.
+        document_manager (ProductRetrievalManager): Manages the retrieval and formatting of product details.
+        chatbot (ConversationCoordinator): The chatbot handling the conversation logic.
+        state_agent (StateController): Manages state transitions within the conversation.
         main_prompt_template (PromptTemplate): The template for generating conversation prompts.
         main_chain (LLMChain): The chain that processes the main interaction logic.
         chain_with_history (RunnableWithMessageHistory): A runnable chain that
@@ -50,9 +54,9 @@ class MarketplaceJourney:
         self.llm = ChatOpenAI(model_name=llm_type, temperature=0)
         self.session_id = str(uuid.uuid4())
         self.history = ChatMessageHistory()
-        self.document_manager = DocumentManager(retriever)
-        self.chatbot = MarketplaceChatbot(self.document_manager)
-        self.state_agent = MarketplaceAgent(self.chatbot)
+        self.document_manager = ProductRetrievalManager(retriever)
+        self.chatbot = ConversationCoordinator(self.document_manager)
+        self.state_agent = StateController(self.chatbot)
 
         self.main_prompt_template = PromptTemplate(
             template="""Você é um assistente de marketplace. Seu objetivo é ajudar os usuários a

@@ -5,7 +5,7 @@ from langchain.prompts import PromptTemplate
 from langchain_community.vectorstores import Chroma
 
 
-class DocumentManager:
+class ProductRetrievalManager:
     def __init__(self, retriever: Chroma):
         self.retriever = retriever
 
@@ -27,7 +27,7 @@ class DocumentManager:
         return retrieved_docs
 
 
-class MarketplaceChatbot:
+class ConversationCoordinator:
     """
     A chatbot class designed for managing interactions within a marketplace environment.
     This chatbot assists users by providing information on products based on their queries
@@ -35,7 +35,7 @@ class MarketplaceChatbot:
 
     Attributes:
         state (str): Represents the current state of the chatbot in the conversation flow.
-        document_manager (DocumentManager): Manages retrieval and formatting of product
+        document_manager (ProductRetrievalManager): Manages retrieval and formatting of product
                                            details from a document database.
         prompts (dict): A dictionary mapping conversation states to their respective
                         prompt templates, which are used to generate responses based on
@@ -47,7 +47,7 @@ class MarketplaceChatbot:
 
     def __init__(self, retriever: Chroma):
         self.state = "Welcome"
-        self.document_manager = DocumentManager(retriever)
+        self.document_manager = ProductRetrievalManager(retriever)
         self.prompts = {
             "Welcome": PromptTemplate(
                 template="""
@@ -101,19 +101,19 @@ class MarketplaceChatbot:
         }
 
 
-class MarketplaceAgent:
+class StateController:
     """
     Manages conversation state transitions within a marketplace environment, utilizing
     a state machine approach with an LLM to determine and update states based on user interaction.
 
     Attributes:
-        chatbot (MarketplaceChatbot): The chatbot instance managing the conversation.
+        chatbot (ConversationCoordinator): The chatbot instance managing the conversation.
         llm (RetrieveAssistantAgent): LLM agent used to determine conversation state.
         visited_states (List[str]): A list of states the conversation has already visited.
         user_proxy (UserProxyAgent): Proxy agent that manages communication with the LLM.
     """
 
-    def __init__(self, chatbot: MarketplaceChatbot):
+    def __init__(self, chatbot: ConversationCoordinator):
         self.chatbot = chatbot
         self.llm = RetrieveAssistantAgent(
             name="MarketplaceStateAgent",

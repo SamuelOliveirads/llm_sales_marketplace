@@ -18,10 +18,10 @@
                 - QA sobre os produtos caso necessário.
             - Coleta de dados mínimos para a compra.
             - Finalização da compra com link de acompanhamento.
-    
+
     - **Armazenar histórico**:
         - Controle de histórico para inferir o progresso das etapas da jornada.
-    
+
     - **Agente para controle de estado**:
         - Agente que vai acompanhar o processo da jornada de compra garantindo que tudo seja executado.
         - Agente que vai acompanhar se cada resposta está de acordo ou se alucinou.
