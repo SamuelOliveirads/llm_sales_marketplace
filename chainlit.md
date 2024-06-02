@@ -1,14 +1,17 @@
-# Welcome to Chainlit! 🚀🤖
+# Bem-vindo ao Ambiente de Testes do Marketplace! 🚀🛒
 
-Hi there, Developer! 👋 We're excited to have you on board. Chainlit is a powerful tool designed to help you prototype, debug and share applications built on top of LLMs.
+Olá! 👋 Bem-vindo ao nosso ambiente Chainlit desenvolvido especialmente para simular interações de marketplace. Este é um espaço onde você pode testar como modelos de linguagem podem ser utilizados para melhorar a experiência de compras em um ambiente virtual.
 
-## Useful Links 🔗
+## Sobre Este Projeto
 
-- **Documentation:** Get started with our comprehensive [Chainlit Documentation](https://docs.chainlit.io) 📚
-- **Discord Community:** Join our friendly [Chainlit Discord](https://discord.gg/k73SQ3FyUh) to ask questions, share your projects, and connect with other developers! 💬
+Este projeto Chainlit é configurado para interagir com uma API que simula um marketplace. Você pode fazer perguntas sobre produtos disponíveis, selecionar produtos para compra e simular o processo de finalização de compra. Use este ambiente para entender como os modelos de linguagem podem ser integrados em aplicações de e-commerce para facilitar e enriquecer as interações com os usuários.
 
-We can't wait to see what you create with Chainlit! Happy coding! 💻😊
+## Como Interagir
 
-## Welcome screen
+- **Faça perguntas sobre produtos**: Simplesmente digite questões sobre os produtos que deseja saber mais.
+- **Selecione produtos para compra**: Siga as instruções para escolher um produto e prosseguir para a etapa de compra.
+- **Finalize a compra**: Complete o processo simulado de compra para ver como o sistema maneja transações.
 
-To modify the welcome screen, edit the `chainlit.md` file at the root of your project. If you do not want a welcome screen, just leave this file empty.
+## Finalizando a Sessão
+
+A sessão pode ser encerrada automaticamente pelo sistema caso você complete uma compra. Ao finalizar, você receberá uma confirmação de que a sessão foi encerrada no servidor.

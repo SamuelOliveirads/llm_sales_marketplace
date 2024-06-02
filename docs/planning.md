@@ -38,4 +38,3 @@
 
     - **Adição de coleta de feedback**:
         - Coleta de histórico e feedback para teste A/B
-

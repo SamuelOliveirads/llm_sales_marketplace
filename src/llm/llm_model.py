@@ -91,7 +91,7 @@ class MarketplaceJourney:
                 for message in self.history.messages
             ]
         )
-        output_dir = "./07_model_output"
+        output_dir = "./data/07_model_output"
         os.makedirs(output_dir, exist_ok=True)
         filename = f"{output_dir}/{self.session_id}.csv"
         df.to_csv(filename, index=False, encoding="utf-8")
