@@ -9,6 +9,7 @@ logs/**
 
 # except their sub-folders
 !data/**/
+!data/07_model_output/**
 !logs/**/
 
 # also keep all .gitkeep files

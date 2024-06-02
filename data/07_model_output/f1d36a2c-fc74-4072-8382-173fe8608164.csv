@@ -1,0 +1,41 @@
+session_id,timestamp,sender,message
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Oi
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Oi
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,Olá! Sou um assistente de marketplace e estou aqui para ajudar você a encontrar os produtos que está procurando. Como posso te ajudar hoje?
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,Olá! Sou um assistente de marketplace e estou aqui para ajudar você a encontrar os produtos que está procurando. Como posso te ajudar hoje?
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Quais produtos vocês tem?
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Quais produtos vocês tem?
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"Temos os seguintes produtos disponíveis:
+- Laptop: UltraBook Pro 15 - R$ 7.999,00
+- Câmera: PhotoSnap DSLR - R$ 4.499,00
+- Tablet: TabMaster 10 - R$ 2.499,00
+- Fone de Ouvido: SoundBuds Plus - R$ 399,00
+
+Posso te ajudar com mais informações sobre algum desses produtos?"
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"Temos os seguintes produtos disponíveis:
+- Laptop: UltraBook Pro 15 - R$ 7.999,00
+- Câmera: PhotoSnap DSLR - R$ 4.499,00
+- Tablet: TabMaster 10 - R$ 2.499,00
+- Fone de Ouvido: SoundBuds Plus - R$ 399,00
+
+Posso te ajudar com mais informações sobre algum desses produtos?"
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Quais as características do laptop?
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Quais as características do laptop?
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"O Laptop UltraBook Pro 15 possui um preço de R$ 7.999,00. Infelizmente, não possuo mais detalhes sobre as características específicas do produto."
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"O Laptop UltraBook Pro 15 possui um preço de R$ 7.999,00. Infelizmente, não possuo mais detalhes sobre as características específicas do produto."
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,E do fone de ouvido?
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,E do fone de ouvido?
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"Olá! Para continuarmos, preciso que você me forneça seu Nome completo, e-mail e telefone, por favor. Essas informações são obrigatórias para prosseguirmos. Além disso, gostaria de saber se você possui fone de ouvido. Aguardo suas respostas."
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"Olá! Para continuarmos, preciso que você me forneça seu Nome completo, e-mail e telefone, por favor. Essas informações são obrigatórias para prosseguirmos. Além disso, gostaria de saber se você possui fone de ouvido. Aguardo suas respostas."
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Quero saber do fone
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Quero saber do fone
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"O fone de ouvido disponível é o SoundBuds Plus, com o preço de R$ 399,00. Infelizmente, não possuo mais detalhes sobre o produto além dessas informações. Se precisar de mais alguma informação, estou à disposição para ajudar."
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"O fone de ouvido disponível é o SoundBuds Plus, com o preço de R$ 399,00. Infelizmente, não possuo mais detalhes sobre o produto além dessas informações. Se precisar de mais alguma informação, estou à disposição para ajudar."
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,"Ok, nesse caso vou querer comprar o laptop"
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,"Ok, nesse caso vou querer comprar o laptop"
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"Pedido confirmado! Para finalizar a compra do laptop, clique no link a seguir: <http://www.test-markeplace.com.br>. Obrigado pela sua compra!"
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"Pedido confirmado! Para finalizar a compra do laptop, clique no link a seguir: <http://www.test-markeplace.com.br>. Obrigado pela sua compra!"
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Ok
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,Human,Ok
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"Obrigado pelo seu feedback! Se precisar de mais alguma coisa, estou à disposição. Por favor, se puder, deixe um feedback positivo ou negativo sobre o atendimento que recebeu. Isso nos ajuda a melhorar nossos serviços. Obrigado!"
+f1d36a2c-fc74-4072-8382-173fe8608164,2024-06-02T20:03:12.105883,AI,"Obrigado pelo seu feedback! Se precisar de mais alguma coisa, estou à disposição. Por favor, se puder, deixe um feedback positivo ou negativo sobre o atendimento que recebeu. Isso nos ajuda a melhorar nossos serviços. Obrigado!"

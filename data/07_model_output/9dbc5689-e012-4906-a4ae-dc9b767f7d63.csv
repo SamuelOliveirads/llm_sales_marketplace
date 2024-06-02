@@ -1,0 +1,47 @@
+session_id,timestamp,sender,message
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,Human,Oi
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,Human,Oi
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,AI,Olá! Sou um assistente de marketplace e estou aqui para te ajudar a encontrar os produtos que você está interessado. Como posso ajudar você hoje?
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,AI,Olá! Sou um assistente de marketplace e estou aqui para te ajudar a encontrar os produtos que você está interessado. Como posso ajudar você hoje?
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,Human,Quais produtos vocês tem?
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,Human,Quais produtos vocês tem?
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,AI,"Temos os seguintes produtos disponíveis:
+- Laptop: UltraBook Pro 15 - R$ 7.999,00
+- Câmera: PhotoSnap DSLR - R$ 4.499,00
+- Tablet: TabMaster 10 - R$ 2.499,00
+- Fone de Ouvido: SoundBuds Plus - R$ 399,00
+
+Posso te ajudar com mais informações sobre algum desses produtos?"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,AI,"Temos os seguintes produtos disponíveis:
+- Laptop: UltraBook Pro 15 - R$ 7.999,00
+- Câmera: PhotoSnap DSLR - R$ 4.499,00
+- Tablet: TabMaster 10 - R$ 2.499,00
+- Fone de Ouvido: SoundBuds Plus - R$ 399,00
+
+Posso te ajudar com mais informações sobre algum desses produtos?"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,Human,Quais as características desse fone?
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,Human,Quais as características desse fone?
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.928405,AI,"O fone de ouvido SoundBuds Plus possui um preço de R$ 399,00. Infelizmente, não possuo maiores detalhes sobre as características específicas deste produto."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"O fone de ouvido SoundBuds Plus possui um preço de R$ 399,00. Infelizmente, não possuo maiores detalhes sobre as características específicas deste produto."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,Ok e da camera?
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,Ok e da camera?
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"A câmera disponível é a PhotoSnap DSLR, com o preço de R$ 4.499,00. Infelizmente, não possuo mais detalhes sobre o produto além dessas informações."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"A câmera disponível é a PhotoSnap DSLR, com o preço de R$ 4.499,00. Infelizmente, não possuo mais detalhes sobre o produto além dessas informações."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,"Tá, então vou querer levar o tablet"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,"Tá, então vou querer levar o tablet"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"Claro! O Tablet TabMaster 10 está disponível por R$ 2.499,00. É um tablet de alta qualidade com diversas funcionalidades. Se tiver mais alguma dúvida específica sobre o produto, estou à disposição para ajudar."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"Claro! O Tablet TabMaster 10 está disponível por R$ 2.499,00. É um tablet de alta qualidade com diversas funcionalidades. Se tiver mais alguma dúvida específica sobre o produto, estou à disposição para ajudar."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,Quero comprar o tablet
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,Quero comprar o tablet
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"Olá! Para continuar com a sua compra do tablet, preciso que você me forneça algumas informações. Por favor, me informe o seu nome completo, e-mail e telefone. Esses dados são necessários para prosseguirmos com o processo de compra. Aguardo as suas informações."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"Olá! Para continuar com a sua compra do tablet, preciso que você me forneça algumas informações. Por favor, me informe o seu nome completo, e-mail e telefone. Esses dados são necessários para prosseguirmos com o processo de compra. Aguardo as suas informações."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,"teste, fulano@gmail.com e 55 99999999"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,"teste, fulano@gmail.com e 55 99999999"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"Pedido confirmado! Você pode finalizar a compra clicando no link a seguir: <http://www.test-markeplace.com.br>.
+Se precisar de mais alguma coisa, estou à disposição."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"Pedido confirmado! Você pode finalizar a compra clicando no link a seguir: <http://www.test-markeplace.com.br>.
+Se precisar de mais alguma coisa, estou à disposição."
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,"Ok, obrigado"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,Human,"Ok, obrigado"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"Obrigado pelo seu feedback! Se precisar de mais alguma coisa, estou à disposição. Por favor, se puder, deixe um feedback sobre o atendimento que recebeu. Tenha um ótimo dia!"
+9dbc5689-e012-4906-a4ae-dc9b767f7d63,2024-06-02T20:10:39.929404,AI,"Obrigado pelo seu feedback! Se precisar de mais alguma coisa, estou à disposição. Por favor, se puder, deixe um feedback sobre o atendimento que recebeu. Tenha um ótimo dia!"
