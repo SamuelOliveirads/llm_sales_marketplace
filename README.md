@@ -14,6 +14,7 @@ Este fluxo cria uma experiência de usuário previsível, permitindo também fle
 ## Considerações e Limitações
 - **Escolha do Modelo**: O modelo escolhido foi o chatgpt 3.5, a escolha de modelos open source se demontra custosa, difícil de escalar e com pouco suporte ao idioma portugues. Modelos como da openai e gemini poderiam ser aplicados a depender de preferencias da empresa, o chatgpt foi escolhido arbitrariamente por possuir uma api robusta e ter maior contato de experiencia com o modelo. A escolha do gpt 3.5 leva em consideração o orçamento de requisições para esse projeto local, uma melhor precisão nas respostas poderiam vir junto com o gpt 4.0.
 - **Desafios**: Controlar o progresso da conversa e gerenciar informações de produto são as maiores dificuldades. Prompts mais específicos e mecanismos para guardar informações sobre os produtos selecionados poderiam melhorar a experiência do usuário.
+- **Dependências**: Framework como opengen são poderososo, mas possuem bastante dependências o que pesam o projeto, em especial na build do Docker e pode ser considerado uma reavaliação do mesmo para aliviar a instancia.
 
 ## Requisitos
 Utilize Python 3.11 e instale as dependências com:
